@@ -6,4 +6,5 @@ Works with SwiftUI.
 
 Your device is a flash light (spotlight) to hightight the image.
 
-![Video Demo](swift_ar.mp4)
+https://github.com/paul-paul-paul-dev/swift-ar-image-track/assets/60066772/a2d3e341-fbba-4697-a436-63db98536901
+
