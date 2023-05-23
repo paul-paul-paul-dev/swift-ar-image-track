@@ -25,23 +25,10 @@ struct ContentView : View {
                     }
                 }
                 .font(.callout)
-                .background(RoundedRectangle(cornerRadius: 20).fill(.regularMaterial)).padding()
+                .background(Rectangle().fill(.regularMaterial)).padding()
             }
         }
     }
-}
-
-struct ARViewContainer: UIViewRepresentable {
-    var arViewModel: ARViewModel
-    
-    func makeUIView(context: Context) -> ARView {
-        arViewModel.startSessionDelegate()
-        arViewModel.initalize()
-        return arViewModel.arView
-    }
-    
-    func updateUIView(_ uiView: ARView, context: Context) {}
-    
 }
 
 #if DEBUG

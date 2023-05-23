@@ -20,7 +20,6 @@ struct ARModel {
         
         arView.automaticallyConfigureSession = false
         
-        
         guard let trackerImage = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
         }

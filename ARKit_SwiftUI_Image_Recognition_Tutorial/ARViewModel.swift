@@ -11,18 +11,18 @@ import ARKit
 import SceneKit
 import UIKit
 
-
 class ARViewModel: UIViewController, ObservableObject, ARSessionDelegate {
-    @Published private var model : ARModel = ARModel()
     
-    var anchorEntity = AnchorEntity()
-
+    @Published private var model: ARModel = ARModel()
+    
     let model_plane = ModelEntity(
         mesh: MeshResource.generateBox(width: 1, height: 1, depth: 0.005),
         materials: [SimpleMaterial(color: .white, isMetallic: true)]
     )
     
     let light = SpotLight()
+    
+    var anchorEntity = AnchorEntity()
     
     var arView : ARView {
         model.arView
@@ -61,8 +61,10 @@ class ARViewModel: UIViewController, ObservableObject, ARSessionDelegate {
     }
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        // Device Posiotn
+        // Device Position
         let cameraTransform = Transform(matrix: frame.camera.transform)
+        
+        // Set Light Position to Device Position
         self.light.position = cameraTransform.translation
         self.light.orientation = cameraTransform.rotation
     }
@@ -88,7 +90,7 @@ class ARViewModel: UIViewController, ObservableObject, ARSessionDelegate {
         let rotation90Degrees = simd_quatf(angle: Float.pi/2, axis: SIMD3<Float>(1, 0, 0))
         let rotatedQuaternion = anchorRotation * rotation90Degrees
         
-        // Set the positions and orientations of the models
+        // Set the positions and orientations of the model
         model_plane.scale = SIMD3<Float>(x: width, y: height, z: 0.005)
         self.model_plane.position = anchorTransform.translation
         self.model_plane.orientation = rotatedQuaternion
