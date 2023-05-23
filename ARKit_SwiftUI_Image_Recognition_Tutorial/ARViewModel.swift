@@ -14,7 +14,7 @@ import UIKit
 class ARViewModel: UIViewController, ObservableObject, ARSessionDelegate {
     
     @Published private var model: ARModel = ARModel()
-    
+        
     let model_plane = ModelEntity(
         mesh: MeshResource.generateBox(width: 1, height: 1, depth: 0.005),
         materials: [SimpleMaterial(color: .white, isMetallic: true)]
@@ -40,9 +40,21 @@ class ARViewModel: UIViewController, ObservableObject, ARSessionDelegate {
         model.arView.session.delegate = self
     }
     
+    func increaseLightIntensity() -> Void {
+        light.light.intensity += 1000
+    }
+    
+    func decreaseLightIntensity() -> Void {
+        light.light.intensity -= 1000
+    }
+    
+    func toggleLightSource(on: Bool) -> Void {
+        light.light.intensity = on ? 4000 : 0
+    }
+    
     func initalize() {
         light.light.color = .white
-        light.light.intensity = 4000
+        light.light.intensity = 0
         light.light.innerAngleInDegrees = 10.0
         light.light.outerAngleInDegrees = 15.0
         light.light.attenuationRadius = 0.5
